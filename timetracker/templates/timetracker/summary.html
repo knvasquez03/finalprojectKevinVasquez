@@ -3,7 +3,9 @@
 {% block content %}
 <h2>Summary</h2>
 
-<p>Total Entries: {{ entry_count }}</p>
-<p>Total Hours Worked: {{ total_hours }}</p>
-<p>Total Earnings: ${{ total_earnings }}</p>
+<div class="card p-3">
+    <p><strong>Total Entries:</strong> {{ entry_count }}</p>
+    <p><strong>Total Hours Worked:</strong> {{ total_hours }}</p>
+    <p><strong>Total Earnings:</strong> ${{ total_earnings }}</p>
+</div>
 {% endblock %}
