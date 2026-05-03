@@ -7,6 +7,8 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .models import Client, TimeEntry
 from .forms import ClientForm, TimeEntryForm, RegisterForm
+from decimal import Decimal
+import requests
 
 
 def home(request):
@@ -28,8 +30,25 @@ def register(request):
 @login_required
 def dashboard(request):
     entries = TimeEntry.objects.filter(user=request.user).order_by('-date_worked')
-    return render(request, 'timetracker/dashboard.html', {'entries': entries})
 
+    current_time = "Time unavailable"
+
+    try:
+        response = requests.get(
+            "https://worldtimeapi.org/api/timezone/America/Chicago",
+            timeout=5
+        )
+
+        if response.status_code == 200:
+            data = response.json()
+            current_time = data.get("datetime", "Time unavailable")
+    except requests.RequestException:
+        current_time = "Time unavailable"
+
+    return render(request, 'timetracker/dashboard.html', {
+        'entries': entries,
+        'current_time': current_time
+    })
 
 @login_required
 def clients(request):
@@ -67,3 +86,27 @@ def add_entry(request):
         form.fields['client'].queryset = Client.objects.filter(user=request.user)
 
     return render(request, 'timetracker/add_entry.html', {'form': form})
+
+@login_required
+def summary(request):
+    entries = TimeEntry.objects.filter(user=request.user)
+
+    total_hours = sum(entry.hours_worked for entry in entries)
+    total_earnings = sum(entry.total_amount() for entry in entries)
+
+    return render(request, 'timetracker/summary.html', {
+        'total_hours': total_hours,
+        'total_earnings': total_earnings,
+        'entry_count': entries.count()
+    })
+
+
+@login_required
+def profile(request):
+    client_count = Client.objects.filter(user=request.user).count()
+    entry_count = TimeEntry.objects.filter(user=request.user).count()
+
+    return render(request, 'timetracker/profile.html', {
+        'client_count': client_count,
+        'entry_count': entry_count
+    })
