@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "timetracker/base.html" %}
 
-</body>
-</html>
+{% block content %}
+<h1>Welcome to TimeX</h1>
+<p>TimeX is a web app for tracking billable hours, clients, and earnings.</p>
+
+<a href="/dashboard/" class="btn btn-primary">Go to Dashboard</a>
+{% endblock %}

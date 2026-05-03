@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "timetracker/base.html" %}
 
-</body>
-</html>
+{% block content %}
+<h2>Dashboard</h2>
+
+{% if entries %}
+<table class="table table-bordered">
+    <tr>
+        <th>Client</th>
+        <th>Description</th>
+        <th>Hours</th>
+        <th>Date</th>
+        <th>Total</th>
+    </tr>
+
+    {% for entry in entries %}
+    <tr>
+        <td>{{ entry.client.name }}</td>
+        <td>{{ entry.description }}</td>
+        <td>{{ entry.hours_worked }}</td>
+        <td>{{ entry.date_worked }}</td>
+        <td>${{ entry.total_amount }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No time entries yet.</p>
+{% endif %}
+{% endblock %}
