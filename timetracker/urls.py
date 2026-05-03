@@ -11,4 +11,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('clients/', views.clients, name='clients'),
     path('add-entry/', views.add_entry, name='add_entry'),
+    path('summary/', views.summary, name='summary'),
+    path('profile/', views.profile, name='profile'),
 ]
