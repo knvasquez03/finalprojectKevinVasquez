@@ -9,6 +9,8 @@ from .models import Client, TimeEntry
 from .forms import ClientForm, TimeEntryForm, RegisterForm
 from decimal import Decimal
 import requests
+from django.shortcuts import render, redirect, get_object_or_404
+
 
 
 def home(request):
@@ -110,3 +112,13 @@ def profile(request):
         'client_count': client_count,
         'entry_count': entry_count
     })
+
+@login_required
+def delete_entry(request, entry_id):
+    entry = get_object_or_404(TimeEntry, id=entry_id, user=request.user)
+
+    if request.method == 'POST':
+        entry.delete()
+        return redirect('dashboard')
+
+    return redirect('dashboard')
