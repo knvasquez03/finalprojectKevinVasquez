@@ -1,9 +1,11 @@
 # INF601 - Advanced Programming in Python
 # Kevin Vasquez
 # Final Project
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('timetracker.urls')),
 ]
