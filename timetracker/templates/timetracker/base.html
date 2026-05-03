@@ -11,10 +11,21 @@
         <a class="navbar-brand" href="/">TimeX</a>
         <div>
             <a class="btn btn-light btn-sm" href="/">Home</a>
-            <a class="btn btn-light btn-sm" href="/dashboard/">Dashboard</a>
-            <a class="btn btn-light btn-sm" href="/clients/">Clients</a>
-            <a class="btn btn-light btn-sm" href="/add-entry/">Add Entry</a>
-            <a class="btn btn-light btn-sm" href="/admin/">Admin</a>
+
+            {% if user.is_authenticated %}
+                <a class="btn btn-light btn-sm" href="/dashboard/">Dashboard</a>
+                <a class="btn btn-light btn-sm" href="/clients/">Clients</a>
+                <a class="btn btn-light btn-sm" href="/add-entry/">Add Entry</a>
+                <a class="btn btn-light btn-sm" href="/admin/">Admin</a>
+
+                <form method="post" action="/accounts/logout/" style="display:inline;">
+                    {% csrf_token %}
+                    <button class="btn btn-warning btn-sm">Logout</button>
+                </form>
+            {% else %}
+                <a class="btn btn-success btn-sm" href="/register/">Register</a>
+                <a class="btn btn-primary btn-sm" href="/accounts/login/">Login</a>
+            {% endif %}
         </div>
     </div>
 </nav>
