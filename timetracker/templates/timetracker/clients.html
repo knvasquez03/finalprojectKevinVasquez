@@ -3,21 +3,27 @@
 {% block content %}
 <h2>Clients</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-primary">Add Client</button>
-</form>
+<div class="card p-3 mb-4">
+    <h5>Add New Client</h5>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary">Add Client</button>
+    </form>
+</div>
 
-<hr>
+<h4>Your Clients</h4>
 
-<h3>Your Clients</h3>
-
-<ul>
+{% if clients %}
+<ul class="list-group">
     {% for client in clients %}
-        <li>{{ client.name }} - ${{ client.hourly_rate }}/hr</li>
-    {% empty %}
-        <li>No clients added yet.</li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span>{{ client.name }}</span>
+            <span>${{ client.hourly_rate }}/hr</span>
+        </li>
     {% endfor %}
 </ul>
+{% else %}
+<p>No clients added yet.</p>
+{% endif %}
 {% endblock %}
