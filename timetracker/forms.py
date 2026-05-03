@@ -2,6 +2,8 @@
 # Kevin Vasquez
 # Final Project
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django import forms
 from .models import Client, TimeEntry
 
@@ -19,3 +21,10 @@ class TimeEntryForm(forms.ModelForm):
         widgets = {
             'date_worked': forms.DateInput(attrs={'type': 'date'}),
         }
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
