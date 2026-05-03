@@ -1,7 +1,5 @@
 # INF601 - Advanced Programming in Python
-
 # Kevin Vasquez
-
 # Final Project
 
 from django.db import models
