@@ -1,0 +1,9 @@
+{% extends "timetracker/base.html" %}
+
+{% block content %}
+<h2>Profile</h2>
+
+<p>Username: {{ user.username }}</p>
+<p>Total Clients: {{ client_count }}</p>
+<p>Total Time Entries: {{ entry_count }}</p>
+{% endblock %}
