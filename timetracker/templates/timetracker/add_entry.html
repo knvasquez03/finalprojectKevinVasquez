@@ -3,9 +3,11 @@
 {% block content %}
 <h2>Add Time Entry</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-success">Save Entry</button>
-</form>
+<div class="card p-3">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success">Save Entry</button>
+    </form>
+</div>
 {% endblock %}
