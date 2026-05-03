@@ -3,7 +3,9 @@
 {% block content %}
 <h2>Profile</h2>
 
-<p>Username: {{ user.username }}</p>
-<p>Total Clients: {{ client_count }}</p>
-<p>Total Time Entries: {{ entry_count }}</p>
+<div class="card p-3">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Total Clients:</strong> {{ client_count }}</p>
+    <p><strong>Total Time Entries:</strong> {{ entry_count }}</p>
+</div>
 {% endblock %}
