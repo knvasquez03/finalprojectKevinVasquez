@@ -16,8 +16,6 @@ The application also integrates an external API to display real-time data on the
  
 ### Dependencies
 
-Clone the repository: git clone https://github.com/YOUR-USERNAME/finalprojectKevinVasquez.git
-
 Please install the pip requirements:
 ```
 
@@ -31,10 +29,17 @@ pip install -r requirement.txt
 In terminal, please type:
 ```
 python manage.py makemigrations
+```
+```
 python manage.py migrate
+```
+```
 python manage.py createsuperuser
+```
+```
 python manage.py runserver
 ```
+
 
 ## Authors
  
